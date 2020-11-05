@@ -1,7 +1,9 @@
 import datetime
-
+from pytest import raises
 
 def time_range(start_time, end_time, number_of_intervals=1, gap_between_intervals_s=0):
+    with raises(ValueError):
+        test_start_earlier_than_end(start_time,end_time)
     start_time_s = datetime.datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
     end_time_s = datetime.datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
     if start_time_s > end_time_s:
@@ -11,6 +13,13 @@ def time_range(start_time, end_time, number_of_intervals=1, gap_between_interval
                   start_time_s + datetime.timedelta(seconds=(i + 1) * d + i * gap_between_intervals_s))
                  for i in range(number_of_intervals)]
     return [(ta.strftime("%Y-%m-%d %H:%M:%S"), tb.strftime("%Y-%m-%d %H:%M:%S")) for ta, tb in sec_range]
+
+def test_start_earlier_than_end(start_time, end_time):
+    start_time_s = datetime.datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
+    end_time_s = datetime.datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
+    if start_time_s < end_time_s:
+        raise ValueError("input start time {} is later than end time {}".format(start_time, end_time))
+
 
 def compute_overlap_time(range1, range2):
     overlap_time = []

@@ -3,12 +3,11 @@ import pytest
 
 interval_1 = time_range("2010-01-12 10:00:00", "2010-01-12 12:00:00")
 interval_2 = time_range("2010-01-12 13:45:00", "2010-01-12 14:00:00")
-interval_3 = time_range("2010-01-12 13:45:00", "2010-01-12 11:00:00")
-interval_4 = time_range("2010-01-12 13:45:00", "2010-01-12 11:00:00", 2, 60)
-interval_5 = time_range("2010-01-12 13:45:00", "2010-01-12 11:00:00", 3, 60)
+interval_3 = time_range("2010-01-12 11:00:00", "2010-01-12 13:45:00")
+interval_4 = time_range("2010-01-12 09:45:00", "2010-01-12 11:00:00", 2, 60)
+interval_5 = time_range("2010-01-12 09:45:00", "2010-01-12 11:00:00", 3, 60)
 interval_6 = time_range("2010-01-12 12:00:00", "2020-01-12 13:00:00")
-interval_7 = time_range("2020-01-12 13:00:00", "2010-01-12 12:00:00")
-interval_8 = time_range("2010-01-12 13:00:00", "2010-01-12 11:00:00", 2, 60)
+interval_8 = time_range("2010-01-12 11:00:00", "2010-01-12 13:00:00", 2, 60)
 
 @pytest.mark.parametrize("test_input",
                             [
@@ -35,7 +34,6 @@ def test_multiple_intervals(test_input):
                             [
                                 ([interval_1, interval_2]),
                                 ([interval_1, interval_6]),
-                                ([interval_1, interval_7])
                             ]
                         )
 
