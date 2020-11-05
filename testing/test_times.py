@@ -16,6 +16,7 @@ interval_8 = time_range("2010-01-12 11:00:00", "2010-01-12 13:00:00", 2, 60)
                             ]
                         )
 
+#test for no overlapping
 def test_no_overlap(test_input):
     result = compute_overlap_time(test_input[0], test_input[1])
     assert result == []
@@ -27,6 +28,7 @@ def test_no_overlap(test_input):
                             ]
                         )
 
+#test for each time range includes intervals
 def test_multiple_intervals(test_input):
     assert len(test_input[0]) > 1 and len(test_input[1]) > 1
 
@@ -37,5 +39,6 @@ def test_multiple_intervals(test_input):
                             ]
                         )
 
+#test the time ranges are consecutive
 def test_consecutive(test_input):
     assert test_input[0][0][0] == test_input[1][-1][-1] or test_input[0][-1][-1] == test_input[1][0][0]
